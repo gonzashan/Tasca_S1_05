@@ -1,0 +1,90 @@
+package n2exercici1;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class N2exercici1 {
+
+    public static void main(String[] args) {
+
+        HashMap<String, Restaurant> restaurantList = new HashMap<>();
+        Scanner sc = new Scanner(System.in);
+        int optionChoose = 0;
+        int points;
+        String nameRestaurant;
+
+        while (optionChoose != 5) {
+            System.out.println("TRIPA-VAIG-SO:");
+            System.out.println("1.- Introducir producto");
+            System.out.println("3.- Mostrar restaurantes");
+            System.out.println("0.- Salir");
+            optionChoose = sc.nextInt();
+
+            switch (optionChoose) {
+                case 1:
+                    System.out.println("Introduce name restaurante:");
+                    nameRestaurant = sc.nextLine();
+                    sc.nextLine();
+                    System.out.println("Introduce su puntuación:");
+                    points = sc.nextInt();
+                    datos(restaurantList);
+
+                    break;
+                case 3:
+                    checkValues(restaurantList);
+                    break;
+                default:
+                    System.out.println("Tienes que introducir una opción valida");
+            }
+
+        }
+
+
+
+
+
+    }
+
+    public static void datos( HashMap<String, Restaurant> restaurantHashMap){
+        Restaurant restaurant = new Restaurant(3,"Pako");
+        Restaurant restaurant1 = new Restaurant( 3,"Luis");
+        Restaurant restaurant2 = new Restaurant( 5,"Pako");
+
+        restaurantHashMap.put("Pako",restaurant);
+        restaurantHashMap.put("Luis",restaurant1);
+        restaurantHashMap.put("Pako",restaurant2);
+    }
+
+
+    public static void checkValues(HashMap<String, Restaurant> restaurantHashMap){
+        System.out.println("dfa");
+        for (Map.Entry<String, Restaurant> entry : restaurantHashMap.entrySet()) {
+            System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue().getPuntuacio() );
+        }
+    }
+    public static void mostrarProductos(HashMap<String, Restaurant> restaurantHashMap) {
+
+        //  Iterator<Map.Entry<String, Restaurant>> iterador = restaurantHashMap.entrySet().iterator();
+        //Iterator<Map.Entry<String, Float>> iterador = listaProductos.entrySet().iterator();
+
+/*        Map.Entry producto;
+        while (iterador.hasNext()) {
+            producto = (Map.Entry) iterador.next();
+            //producto = iterador.next(); Si se usase tambien la otra linea comentada.
+            System.out.println(producto.getKey() + " - " + producto.getValue());
+        }*/
+
+    }
+
+    public static void setNewRestaurant(String name, int points, HashMap<String, Restaurant> restList){
+        System.out.println("Existe name? "     + restList.containsKey(name)
+                           + " --> Puntuación? " + restList.containsKey(points) );
+        if (restList.containsKey(name) && restList.containsValue(points)) {
+            System.out.println("No se puede introducir el producto. El código esta repetido.");
+        } else {
+            restList.put(name, new Restaurant(points, name));
+        }
+    }
+}
